@@ -10,6 +10,10 @@ import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -18,6 +22,7 @@ import java.net.URLConnection;
 public class MainActivity extends AppCompatActivity{
 
     Button btnReadJsonDemo1;
+    String khoahoc = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +31,7 @@ public class MainActivity extends AppCompatActivity{
         btnReadJsonDemo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo1.json");
+                new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo4.json");
             }
         });
     }
@@ -40,7 +45,21 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("BBB",s.toString());
+
+            // The nam ngoai se khai bao
+
+            try {
+                JSONArray jsonArray = new JSONArray(s);
+
+                for (int i = 1 ; i<= jsonArray.length() ; i++ ){
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+
+                    khoahoc += jsonObject.getString("khoahoc");
+                    Log.d("BBB",khoahoc);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         private String docNoiDung_Tu_URL(String theUrl){
