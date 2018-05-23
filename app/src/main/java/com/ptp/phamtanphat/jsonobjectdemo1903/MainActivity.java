@@ -3,6 +3,7 @@ package com.ptp.phamtanphat.jsonobjectdemo1903;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewManager;
 import android.widget.Adapter;
@@ -22,13 +23,26 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btnReadJsonDemo1 = findViewById(R.id.buttnReadjson);
+        btnReadJsonDemo1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo1.json");
+            }
+        });
     }
     class ReadJsonDemo1 extends AsyncTask<String,Void,String>{
 
         @Override
         protected String doInBackground(String... strings) {
-            return null;
+            return docNoiDung_Tu_URL(strings[0]);
         }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            Log.d("BBB",s.toString());
+        }
+
         private String docNoiDung_Tu_URL(String theUrl){
             StringBuilder content = new StringBuilder();
             try    {
