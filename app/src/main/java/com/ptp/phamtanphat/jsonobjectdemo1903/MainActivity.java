@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity{
         btnReadJsonDemo1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo4.json");
+                new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo3.json");
             }
         });
     }
@@ -45,21 +45,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-
-            // The nam ngoai se khai bao
-
-            try {
-                JSONArray jsonArray = new JSONArray(s);
-
-                for (int i = 1 ; i<= jsonArray.length() ; i++ ){
-                    JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-                    khoahoc += jsonObject.getString("khoahoc");
-                    Log.d("BBB",khoahoc);
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            Log.d("BBB",s);
         }
 
         private String docNoiDung_Tu_URL(String theUrl){
