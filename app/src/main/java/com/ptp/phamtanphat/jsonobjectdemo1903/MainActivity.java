@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity{
 
     Button btnEn,btnVn;
     TextView txtKetqua;
-    String khoahoc = "";
+    String dulieujson = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,10 +34,18 @@ public class MainActivity extends AppCompatActivity{
         btnVn = findViewById(R.id.buttnVn);
         txtKetqua = findViewById(R.id.textviewKetqua);
 
+        new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo3.json");
+
         btnEn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo3.json");
+                ReadLanguage(dulieujson , "en");
+        }
+        });
+        btnVn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ReadLanguage(dulieujson , "vn");
             }
         });
     }
@@ -51,6 +59,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
+            dulieujson = s;
             ReadLanguage(s , "en");
         }
 
