@@ -9,6 +9,7 @@ import android.view.ViewManager;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,14 +22,19 @@ import java.net.URLConnection;
 
 public class MainActivity extends AppCompatActivity{
 
-    Button btnReadJsonDemo1;
+    Button btnEn,btnVn;
+    TextView txtKetqua;
     String khoahoc = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnReadJsonDemo1 = findViewById(R.id.buttnReadjson);
-        btnReadJsonDemo1.setOnClickListener(new View.OnClickListener() {
+
+        btnEn = findViewById(R.id.buttnEn);
+        btnVn = findViewById(R.id.buttnVn);
+        txtKetqua = findViewById(R.id.textviewKetqua);
+
+        btnEn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new ReadJsonDemo1().execute("https://khoapham.vn/KhoaPhamTraining/json/tien/demo3.json");
