@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity{
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("BBB",s);
+            ReadLanguage(s , "en");
         }
 
         private String docNoiDung_Tu_URL(String theUrl){
@@ -78,6 +78,29 @@ public class MainActivity extends AppCompatActivity{
                 e.printStackTrace();
             }
             return content.toString();
+        }
+    }
+    public void ReadLanguage(String data , String word){
+        try {
+            JSONObject jsonObject = new JSONObject(data);
+            JSONObject jsonObjectLanguage = jsonObject.getJSONObject("language");
+
+            JSONObject jsonObjectEn = jsonObjectLanguage.getJSONObject(word);
+            String name = jsonObjectEn.getString("name");
+            String address = jsonObjectEn.getString("address");
+            String course1 = jsonObjectEn.getString("course1");
+            String course2 = jsonObjectEn.getString("course2");
+            String course3 = jsonObjectEn.getString("course3");
+
+            String ten ="Name : " + name + "\n";
+            String diachi ="Dia chi : " + address + "\n";
+            String khoahoc1 ="Khoa hoc 1 : " + course1 + "\n";
+            String khoahoc2 ="Khoa hoc 2 : " + course2 + "\n";
+            String khoahoc3 ="Khoa hoc 3 : " + course3 + "\n";
+
+           txtKetqua.setText(ten + diachi + khoahoc1 + khoahoc2 + khoahoc3 );
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 }
